@@ -1,28 +1,37 @@
 import { Injectable } from "@nestjs/common";
+import { InjectRepository } from "@nestjs/typeorm";
+import { Repository } from "typeorm";
 import { GetUserParamsDto } from "../dtos/get-user.dto";
+import { User } from "../user.entity";
+import { CreateUserDto } from "../dtos/create-user.dto";
 
-
-@Injectable(   )
+@Injectable()
 export class UserService {
 
-    public findall(getuserparamsdot : GetUserParamsDto, limit : number, ){
+    constructor(
+        @InjectRepository(User)
+        private userRepository: Repository<User>,
+    ) {}
 
-        return [
-
-            {
-                firstname : "hello world",
-                email : "ho@gmail.com"
-            }
-        ]
+    public async createUser(createUserDto: CreateUserDto) {
+        const existingUser = await this.userRepository.findOneById(createUserDto.email);
+        // Add logic to handle existingUser
     }
-  
 
-    public findonebyid(id:  number){
+    public findAll(getUserParamsDto: GetUserParamsDto, limit: number) {
+        return [
+            {
+                firstname: "hello world",
+                email: "ho@gmail.com"
+            }
+        ];
+    }
 
+    public findOneById(id: number) {
         return {
-            id:"1221",
-            firstname : "hello world",
-            email : "ho@gmail.com"
+            id: "1221",
+            firstname: "hello world",
+            email: "ho@gmail.com"
         };
     }
 }

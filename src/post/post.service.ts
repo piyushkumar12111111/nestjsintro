@@ -2,7 +2,11 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class PostService {
+    
+    constructor(){
 
+        
+    }
 
     public getAllPost(userid : string){
 
