@@ -1,6 +1,7 @@
 
+import { Tag } from 'src/tags/tags.entity';
 import { User } from 'src/users/user.entity';
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, OneToMany , ManyToOne } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, OneToMany , ManyToOne, OneToOne, JoinColumn } from 'typeorm';
 @Entity()
 export class Post {
 
@@ -25,4 +26,8 @@ export class Post {
 
     @UpdateDateColumn() 
     updatedAt: Date;
+
+    @OneToOne(()=> Tag)
+    @JoinColumn()  //! responsible for creating the column where it is there 
+    tags? : Tag;
 }

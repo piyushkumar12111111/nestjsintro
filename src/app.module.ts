@@ -6,6 +6,7 @@ import { PostModule } from './post/post.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './users/user.entity';
 import { TagsModule } from './tags/tags.module';
+import { MetaOptionsService } from './meta-options/meta-options.service';
 
 @Module({
   imports: [
@@ -15,11 +16,12 @@ import { TagsModule } from './tags/tags.module';
       useFactory:  () => ({
       type: 'postgres',
       host: 'localhost',
+      autoLoadEntities: true ,
       port: 5432,
       username: 'postgres',
       password: 'M@sk$9000!',
       database: 'nestjs_intro',
-      entities: [User , Post],
+     // entities: [User , Post],
       synchronize: true, // Set to false in production  //! do not use it in production mode 
     }),
   }),
@@ -28,6 +30,6 @@ import { TagsModule } from './tags/tags.module';
     TagsModule
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, MetaOptionsService],
 })
 export class AppModule {}
